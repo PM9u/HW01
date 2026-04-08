@@ -44,18 +44,21 @@ jobs:
     runs-on: self-hosted
     steps:
       - name: Pull Latest Image
+        shell: bash
         run: docker pull ${{ env.DOCKER_USERNAME }}/${{ env.IMAGE_NAME }}:latest
 
       - name: Stop and Remove Old Container
+        shell: bash
         # 이미지가 없거나 컨테이너가 없을 때 오류가 발생하지 않도록 || true 사용
         run: |
           docker stop ${{ env.IMAGE_NAME }} || true
           docker rm ${{ env.IMAGE_NAME }} || true
 
       - name: Run New Container
+        shell: bash
         run: |
           docker run -d \
             --name ${{ env.IMAGE_NAME }} \
-            -p 8000:8000 \
+            -p 8080:8000 \
             --restart unless-stopped \
             ${{ env.DOCKER_USERNAME }}/${{ env.IMAGE_NAME }}:latest
