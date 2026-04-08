@@ -55,9 +55,4 @@ jobs:
         continue-on-error: true
 
       - name: Run New Container
-        run: |
-          docker run -d \
-            --name ${{ env.IMAGE_NAME }} \
-            -p 8080:8000 \
-            --restart unless-stopped \
-            ${{ env.DOCKER_USERNAME }}/${{ env.IMAGE_NAME }}:latest
+        run: docker run -d --name ${{ env.IMAGE_NAME }} -p 8080:8000 --restart unless-stopped ${{ env.DOCKER_USERNAME }}/${{ env.IMAGE_NAME }}:latest
