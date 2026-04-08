@@ -33,3 +33,9 @@ def predict(text: str) -> str:
     """주어진 텍스트에 대해 스팸 여부를 예측합니다."""
     prediction = trained_model.predict([text])
     return prediction[0]
+
+KOREAN_SPAM_KEYWORDS = ['광고', '무료', '적중']
+
+def is_korean_spam(text: str) -> bool:
+    """한국어 스팸 키워드가 포함되어 있는지 확인합니다."""
+    return any(keyword in text for keyword in KOREAN_SPAM_KEYWORDS)
